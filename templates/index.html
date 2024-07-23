@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <title>Food Order Website</title>
+    <link rel="icon" type="image/png" href="/static/images/thumb_image.png">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="/static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/assets/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/assets/css/templatemo-klassy-cafe.css">
+    <link rel="stylesheet" href="/static/assets/css/owl-carousel.css">
+    <link rel="stylesheet" href="/static/assets/css/lightbox.css">
+    <style>
+        .header-section {
+    background-image: url(/static/images/banner.avif);
+    padding-block: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: white;
+    background-repeat: no-repeat;
+    object-fit: contain;
+    background-size: cover;
+}
+
+.menu-section {
+    padding: 60px 0;
+}
+
+.menu-heading {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.menu-item {
+    display: flex;
+    margin-bottom: 30px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    align-items: center; /* Align items vertically */
+}
+
+.menu-item img {
+    width: 100%;
+    height: 200px; /* Fixed height for all images */
+    object-fit: contain; /* Ensure the image covers the entire area without distortion */
+}
+
+.menu-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.menu-content h4 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.menu-content p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.menu-content .price {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-controls button {
+    width: 30px;
+    height: 30px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.quantity-controls input {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 10px;
+}
+
+.add-to-cart {
+    margin-top: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cart-summary {
+    position: sticky;
+    top: 100px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.empty-cart {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+
+        .show-more {
+            color: #007bff;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        .order-placed {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%; /* Full width button */
+    text-align: center;
+}
+
+.popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .popup button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+    <div class="header-section">
+        <h1>Welcome, {{ Users.name }}</h1>
+    </div>
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.html" class="logo">
+                            <img src="/static/images/banner.avif" align="" style="width: 100px;">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="#menu-items">Add Items </a></li>
+                            <li class="scroll-to-section"><a href="#" onclick="logoutUser()">Logout</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section" id="chefs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 offset-lg-4 text-center">
+                    <div class="section-heading">
+                        <h6>Our Restaurant</h6>
+                        <h2>We offer the best ingredients for you</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for admin in admins %}
+                <div class="col-lg-4 scroll-to-section" >
+                    <a href="#menu-items" >
+                    <div class="chef-item" data-admin-id="{{ admin.id }}" data-resturent-name="{{ admin.resturent_name }}">
+                        <div class="thumb">
+                            <div class="overlay"></div>
+                            <img src="{{ url_for('static', filename='uploads/' + admin.cover_image.split('/')[-1]) }}" alt="{{ admin.resturent_name }}">
+                        </div>
+                        <div class="down-content">
+                            <h4>{{ admin.resturent_name }}</h4>
+                            <span>{{ admin.address }}</span>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 offset-lg-4 text-center">
+                    <div class="menu-heading">
+                        <h6>Menu</h6>
+                        <h2 id="restaurant-name-heading">Discover our delicious offerings</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="column" id="menu-items">
+                        <!-- Menu items will be dynamically inserted here -->
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="cart-summary" id="cart-summary">
+                        <h4>Cart Summary</h4>
+                        <div id="cart-items">
+                            <!-- Cart items will be dynamically inserted here -->
+                        </div>
+                        <div>
+                            <strong>Total: $<span id="total-price">0.00</span></strong>
+                        </div>
+                        <button class="empty-cart" onclick="emptyCart()">Empty Cart</button>
+                         <button class="order-placed" onclick="placeOrder()">Order Placed</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup">
+            <h4>Thank you for your order!</h4>
+            <p>Your order has been placed successfully.</p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+    
+
+    <script src="/static/assets/js/jquery-2.1.0.min.js"></script>
+    <script src="/static/assets/js/popper.js"></script>
+    <script src="/static/assets/js/bootstrap.min.js"></script>
+    <script src="/static/assets/js/owl-carousel.js"></script>
+    <script src="/static/assets/js/accordions.js"></script>
+    <script src="/static/assets/js/datepicker.js"></script>
+    <script src="/static/assets/js/scrollreveal.min.js"></script>
+    <script src="/static/assets/js/waypoints.min.js"></script>
+    <script src="/static/assets/js/jquery.counterup.min.js"></script>
+    <script src="/static/assets/js/imgfix.min.js"></script>
+    <script src="/static/assets/js/slick.js"></script>
+    <script src="/static/assets/js/lightbox.js"></script>
+    <script src="/static/assets/js/isotope.js"></script>
+    <script src="/static/assets/js/custom.js"></script>
+    <script>
+        let cart = [];
+        const userId = "{{ Users.id }}";  // Assuming you pass user ID from the backend
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const chefItems = document.querySelectorAll('.chef-item');
+            chefItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const adminId = this.getAttribute('data-admin-id');
+                    const resturentName = this.getAttribute('data-resturent-name');
+                    fetchItems(adminId, resturentName);
+                });
+            });
+
+            // Load cart from localStorage
+            loadCart();
+            updateCart();
+        });
+
+        function fetchItems(adminId, resturentName) {
+            fetch(`/restaurant/${adminId}/items`)
+                .then(response => response.json())
+                .then(data => {
+                    const menuItemsContainer = document.getElementById('menu-items');
+                    const restaurantNameHeading = document.getElementById('restaurant-name-heading');
+                    menuItemsContainer.innerHTML = ''; // Clear previous items
+                    restaurantNameHeading.textContent = `Food from ${resturentName}`; // Update the heading
+
+                    data.forEach(item => {
+                        const menuItem = document.createElement('div');
+                        menuItem.classList.add('col-lg-12');
+                        menuItem.innerHTML = `
+                            <div class="menu-item" data-item-id="${item.id}" data-item-name="${item.name}" data-item-price="${item.price}">
+                                <img src="/static/uploads/${item.image.split('/').pop()}" alt="${item.name}">
+                                <div class="menu-content">
+                                    <h4>${item.name}</h4>
+                                    <p class='testimonial-text'>${item.description}</p>
+                                    <div class="price">$${item.price}</div>
+                                    <div class="quantity-controls">
+                                        <button onclick="changeQuantity(this, -1)">-</button>
+                                        <input type="number" value="1" min="1">
+                                        <button onclick="changeQuantity(this, 1)">+</button>
+                                    </div>
+                                    <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                                </div>
+                            </div>
+                        `;
+                        menuItemsContainer.appendChild(menuItem);
+                    });
+
+                    // Setup read more/less functionality
+                    setupTestimonials();
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function changeQuantity(button, delta) {
+            const input = button.parentElement.querySelector('input');
+            let value = parseInt(input.value);
+            value = Math.max(1, value + delta);
+            input.value = value;
+        }
+
+        function addToCart(button) {
+            const menuItem = button.closest('.menu-item');
+            const itemName = menuItem.getAttribute('data-item-name');
+            const itemPrice = parseFloat(menuItem.getAttribute('data-item-price'));
+            const quantity = parseInt(menuItem.querySelector('input').value);
+
+            fetch('/add-to-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ item_name: itemName, item_price: itemPrice, quantity: quantity })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateCart();
+                } else {
+                    alert('Error adding item to cart.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function updateCart() {
+            fetch('/cart')
+                .then(response => response.json())
+                .then(data => {
+                    const cartItemsContainer = document.getElementById('cart-items');
+                    const totalPriceElement = document.getElementById('total-price');
+                    cartItemsContainer.innerHTML = '';
+                    let totalPrice = 0;
+
+                    data.items.forEach(item => {
+                        const cartItem = document.createElement('div');
+                        cartItem.classList.add('cart-item');
+                        cartItem.innerHTML = `
+                            <div>${item.item_name}</div>
+                            <div>$${item.item_price} x ${item.quantity}</div>
+                            <div>$${(item.item_price * item.quantity).toFixed(2)}</div>
+                        `;
+                        cartItemsContainer.appendChild(cartItem);
+                        totalPrice += item.item_price * item.quantity;
+                    });
+
+                    totalPriceElement.textContent = totalPrice.toFixed(2);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function saveCart() {
+            localStorage.setItem(`cart_${userId}`, JSON.stringify(cart));
+        }
+
+        function loadCart() {
+            const storedCart = localStorage.getItem(`cart_${userId}`);
+            if (storedCart) {
+                cart = JSON.parse(storedCart);
+            }
+        }
+
+        function emptyCart() {
+            fetch('/empty-cart', {
+                method: 'POST',
+                credentials: 'same-origin'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    cart = [];
+                    saveCart();
+                    updateCart();
+                } else {
+                    alert('Error emptying cart.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function logoutUser() {
+            fetch('/logout', {
+                method: 'POST',
+                credentials: 'same-origin'
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/login'; // Redirect to login page after logout
+                } else {
+                    console.error('Logout failed');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function setupTestimonials() {
+            const testimonials = document.querySelectorAll('.testimonial-text');
+            testimonials.forEach(testimonial => {
+                setupTestimonial(testimonial);
+            });
+        }
+
+        function setupTestimonial(testimonial) {
+            const fullText = testimonial.innerText;
+            const wordLimit = 10; // Set the word limit
+            const words = fullText.split(' ');
+
+            if (words.length > wordLimit) {
+                const truncatedText = words.slice(0, wordLimit).join(' ') + '...';
+                testimonial.setAttribute('data-full-text', fullText);
+                testimonial.setAttribute('data-truncated-text', truncatedText);
+
+                const showMoreSpan = document.createElement('span');
+                showMoreSpan.className = 'show-more';
+                showMoreSpan.innerText = 'Read More';
+                showMoreSpan.style.display = 'inline';
+
+                testimonial.innerText = truncatedText;
+                testimonial.appendChild(showMoreSpan);
+            }
+        }
+
+        document.body.addEventListener('click', function (event) {
+            if (event.target && event.target.classList.contains('show-more')) {
+                event.preventDefault();
+                const testimonial = event.target.parentElement;
+                const fullText = testimonial.getAttribute('data-full-text');
+                const truncatedText = testimonial.getAttribute('data-truncated-text');
+                toggleText(testimonial, event.target, fullText, truncatedText);
+            }
+        });
+
+        function toggleText(textElement, linkElement, fullText, truncatedText) {
+            if (linkElement.innerText === 'Read More') {
+                textElement.innerText = fullText;
+                linkElement.innerText = 'Show Less';
+            } else {
+                textElement.innerText = truncatedText;
+                linkElement.innerText = 'Read More';
+            }
+            textElement.appendChild(linkElement); // Ensure the link remains after the text
+        }
+
+        function placeOrder() {
+            fetch('/place-order', {
+                method: 'POST',
+                credentials: 'same-origin'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showPopup();
+                    cart = [];
+                    saveCart();
+                    updateCart();
+                } else {
+                    alert('Error placing order.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    
+        function showPopup() {
+            document.getElementById('popup-overlay').style.display = 'flex';
+        }
+    
+        function closePopup() {
+            document.getElementById('popup-overlay').style.display = 'none';
+        }
+    
+    </script>
+</body>
+
+</html>

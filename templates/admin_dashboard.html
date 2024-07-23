@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="/static/images/thumb_image.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/assets/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/assets/css/templatemo-klassy-cafe.css">
+    <link rel="stylesheet" href="/static/assets/css/owl-carousel.css">
+    <link rel="stylesheet" href="/static/assets/css/lightbox.css">
+    <link rel="stylesheet" href="/static/css/dashbord.css">
+    <style>
+        /* Custom Form CSS */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .custom-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .custom-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input[type="text"],
+        .form-group textarea,
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .form-group .form-control-file {
+            padding: 5px;
+        }
+        .form-group .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-group .btn:hover {
+            background-color: #0056b3;
+        }
+        .form-group .btn-danger {
+            background-color: #dc3545;
+        }
+        .form-group .btn-danger:hover {
+            background-color: #c82333;
+        }
+        .cover-image {
+            display: block;
+            margin: 0 auto 15px;
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+       .main-container{
+            display: flex;
+            flex-direction: row;
+        }
+
+        .child{
+            width: 50%;
+            padding-block: 40px;
+        }
+
+        .tabs-content{
+            padding-top: 0px;
+            width: 100%;
+        }
+
+        #offers{
+            padding-top: 0px !important;
+        }
+
+        .tab-item{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tab-item img{
+            height: 60px !important;
+        }
+
+        .price h6{
+            top: 0px !important;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
+    <!-- ***** Preloader End ***** -->
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.html" class="logo">
+                            <img src="/static/images/thumb_image.png" align="" style="width: 100px;">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="#main-container">Add Items </a></li>
+                            <li class="scroll-to-section"><a href="#" onclick="logoutAdmin()">Logout</a></li>                    
+                        </ul>        
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="left-content">
+                        <div class="inner-content">
+                            <h1>Welcome, {{ admin.name }}</h1>
+                            <div class="main-white-button scroll-to-section">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="main-banner header-text">
+                        <div class="Modern-Slider">
+                          <!-- Item -->
+                          <div class="item">
+                            <div class="img-fill">
+                                <img src="/static/assets/images/slide-01.jpg" alt="">
+                            </div>
+                          </div>
+                          <!-- // Item -->
+                          <!-- Item -->
+                          <div class="item">
+                            <div class="img-fill">
+                                <img src="/static/assets/images/slide-02.jpg" alt="">
+                            </div>
+                          </div>
+                          <!-- // Item -->
+                          <!-- Item -->
+                          <div class="item">
+                            <div class="img-fill">
+                                <img src="/static/assets/images/slide-03.jpg" alt="">
+                            </div>
+                          </div>
+                          <!-- // Item -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='main-container'class="main-container">
+        <div class="form-container child">
+            <form id="cover-image-form" class="custom-form" method="POST" enctype="multipart/form-data">
+                <h2>Upload Cover Image</h2>
+                {% if admin.cover_image %}
+                    <img src="{{ url_for('static', filename='uploads/' + admin.cover_image.split('/')[-1]) }}" alt="Cover Image" class="cover-image">
+                    <div class="form-group">
+                        <button type="button" id="delete-cover-btn" class="btn btn-danger">Delete Cover Image</button>
+                    </div>
+                {% else %}
+                    <div class="form-group">
+                        <label for="cover_image">Cover Image:</label>
+                        <input type="file" id="cover_image" name="cover_image" class="form-control-file">
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Upload Cover Image</button>
+                </div>
+            </form>
+            <form id="add-item-form" class="custom-form" method="POST" enctype="multipart/form-data">
+                <h2>Add New Item</h2>
+                <div class="form-group">
+                    <label for="item_name">Item Name:</label>
+                    <input type="text" id="item_name" name="item_name" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="item_description">Item Description:</label>
+                    <textarea id="item_description" name="item_description" required class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="item_price">Item Price:</label>
+                    <input type="text" id="item_price" name="item_price" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="item_image">Item Image:</label>
+                    <input type="file" id="item_image" name="item_image" class="form-control-file">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Add Item</button>
+                </div>
+            </form>
+        </div>
+        <section class="section child" id="offers">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <section class='tabs-content'>
+                            <article id='tabs-1'>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="left-list">
+                                                {% for item in items %}
+                                                    {% if loop.index is divisibleby 2 %}
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{{ url_for('static', filename='uploads/' + item.image.split('/')[-1]) }}" alt="{{ item.name }}">
+                                                            <h4>{{ item.name }}</h4>
+                                                            <p>{{ item.description }}</p>
+                                                            <div class="price">
+                                                                <h6>${{ item.price }}</h6>
+                                                            </div>
+                                                            <form class="delete-item-form" data-item-id="{{ item.id }}">
+                                                                <input type="hidden" name="delete_item_id" value="{{ item.id }}">
+                                                                <button  class="btn btn-danger" type="submit">Delete</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="right-list">
+                                                {% for item in items %}
+                                                    {% if not loop.index is divisibleby 2 %}
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{{ url_for('static', filename='uploads/' + item.image.split('/')[-1]) }}" alt="{{ item.name }}">
+                                                            <h4>{{ item.name }}</h4>
+                                                            <p>{{ item.description }}</p>
+                                                            <div class="price">
+                                                                <h6>${{ item.price }}</h6>
+                                                            </div>
+                                                            <form class="delete-item-form" data-item-id="{{ item.id }}">
+                                                                <input type="hidden" name="delete_item_id" value="{{ item.id }}">
+                                                                <button class="btn btn-danger" type="submit">Delete</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+         function logoutAdmin() {
+            window.location.href = "{{ url_for('admin_logout') }}";
+        }
+        document.getElementById('cover-image-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            fetch('{{ url_for("admin_dashboard") }}', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json()).then(data => {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert('Error uploading cover image.');
+                }
+            }).catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('add-item-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            fetch('{{ url_for("admin_dashboard") }}', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json()).then(data => {
+                if (data.success) {
+                    var itemHtml = `
+                        <div class="col-lg-12">
+                            <div class="tab-item">
+                                <img src="${data.item.image}" alt="${data.item.name}">
+                                <h4>${data.item.name}</h4>
+                                <p>${data.item.description}</p>
+                                <div class="price">
+                                    <h6>$${data.item.price}</h6>
+                                </div>
+                                <form class="delete-item-form" data-item-id="${data.item.id}">
+                                    <input type="hidden" name="delete_item_id" value="${data.item.id}">
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
+                            </div>
+                        </div>`;
+                    if (document.querySelector('.left-list').children.length <= document.querySelector('.right-list').children.length) {
+                        document.querySelector('.left-list').innerHTML += itemHtml;
+                    } else {
+                        document.querySelector('.right-list').innerHTML += itemHtml;
+                    }
+                    this.reset();
+                } else {
+                    alert('Error adding item.');
+                }
+            }).catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('cover-image-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            fetch('{{ url_for("admin_dashboard") }}', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json()).then(data => {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert('Error uploading cover image.');
+                }
+            }).catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('delete-cover-btn').addEventListener('click', function() {
+            fetch('{{ url_for("admin_dashboard") }}', {
+                method: 'POST',
+                body: new URLSearchParams('delete_cover=true')
+            }).then(response => response.json()).then(data => {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert('Error deleting cover image.');
+                }
+            }).catch(error => console.error('Error:', error));
+        });
+
+        document.addEventListener('submit', function(event) {
+            if (event.target && event.target.classList.contains('delete-item-form')) {
+                event.preventDefault();
+                var formData = new FormData(event.target);
+                fetch('{{ url_for("admin_dashboard") }}', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.json()).then(data => {
+                    if (data.success) {
+                        document.querySelector(`[data-item-id="${data.item_id}"]`).parentElement.remove();
+                    } else {
+                        alert('Error deleting item.');
+                    }
+                }).catch(error => console.error('Error:', error));
+            }
+        });
+    </script>
+    <script src="/static/assets/js/jquery-2.1.0.min.js"></script>
+    <script src="/static/assets/js/popper.js"></script>
+    <script src="/static/assets/js/bootstrap.min.js"></script>
+    <script src="/static/assets/js/owl-carousel.js"></script>
+    <script src="/static/assets/js/accordions.js"></script>
+    <script src="/static/assets/js/datepicker.js"></script>
+    <script src="/static/assets/js/scrollreveal.min.js"></script>
+    <script src="/static/assets/js/waypoints.min.js"></script>
+    <script src="/static/assets/js/jquery.counterup.min.js"></script>
+    <script src="/static/assets/js/imgfix.min.js"></script> 
+    <script src="/static/assets/js/slick.js"></script> 
+    <script src="/static/assets/js/lightbox.js"></script> 
+    <script src="/static/assets/js/isotope.js"></script> 
+    <script src="/static/assets/js/custom.js"></script>
+</body>
+</html>

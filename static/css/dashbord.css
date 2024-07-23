@@ -1,0 +1,9 @@
+.cover-image-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding-inline: 40px;
+    padding-block: 75px;
+
+}
